@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palindromic.Console", "Pali
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palindromic.Core.Tests", "Palindromic.Core.Tests\Palindromic.Core.Tests.csproj", "{45844C44-D48B-4D85-9993-372FF0156C69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Palindromic.Functions", "Palindromic.Functions\Palindromic.Functions.csproj", "{2960030B-2CB6-4555-B40A-FDFEB64C07F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Palindromic.Functions", "Palindromic.Functions\Palindromic.Functions.csproj", "{2960030B-2CB6-4555-B40A-FDFEB64C07F1}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "palindromic.web", "Palindromic.Web\palindromic.web.esproj", "{EFD04F53-9B44-4F6D-BBB7-37B51D6FA490}"
 EndProject

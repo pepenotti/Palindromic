@@ -2,3 +2,10 @@
 bin/
 obj/
 node_modules/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
+.terraform
+.terraform.*
