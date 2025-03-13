@@ -66,12 +66,12 @@ If you want to run the application locally, you can follow the instructions belo
 
 ### Configuration
 
-Ensure that your web application is configured to communicate with the locally running Azure Function. You can set the `VITE_AZURE_FUNCTION_URL` environment variable to point to the local URL of the Azure Function, typically `http://localhost:7071/api`.
+Ensure that your web application is configured to communicate with the locally running Azure Function. You can set the `VITE_AZURE_FUNCTION_URL` environment variable to point to the local URL of the Azure Function, typically `http://localhost:7071`.
 
 You can set this environment variable in a [.env](./src/palindromic.web/.env) file in your web application directory:
 
 ```properties
-VITE_AZURE_FUNCTION_URL=http://localhost:7071/api
+VITE_AZURE_FUNCTION_URL=http://localhost:7071
 ```
 
 ### Running as Console Application
