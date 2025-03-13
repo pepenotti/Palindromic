@@ -4,6 +4,7 @@
 	{
 		/// <summary>
 		/// Get the longest palindromic number between two numbers
+		/// This one is the brute force approach
 		/// </summary>
 		/// <param name="inputA"></param>
 		/// <param name="inputB"></param>
@@ -50,6 +51,15 @@
 			return inputString == reversedString;
 		}
 
+		/// <summary>
+		/// This method gets the closest lower palindromic number between two numbers
+		/// It was intended to be a more optimized version of the GetLongestBetween method
+		/// But i couldn't make it work properly with the time i
+		/// </summary>
+		/// <param name="inputA"></param>
+		/// <param name="inputB"></param>
+		/// <returns></returns>
+		/// <exception cref="InvalidOperationException"></exception>
 		public int GetCloserLowerPalindromic(int inputA, int inputB)
 		{
 			var originalHighest = inputA > inputB ? inputA : inputB;

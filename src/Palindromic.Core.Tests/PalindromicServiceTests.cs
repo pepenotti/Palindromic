@@ -61,7 +61,7 @@ namespace Palindromic.Core.Tests
 		[InlineData(11000, 0, 10901)] // Test zeroes
 		[InlineData(21000, 0, 20902)] // Test zeroes
 		[InlineData(20002, 0, 19991)] // Test zeroes
-		[InlineData(int.MinValue, int.MaxValue, 0)] // Test bounds
+		[InlineData(int.MinValue, int.MaxValue, 2147447412)] // Test bounds
 		public void GetLongestBetween_WhenPalindromeFound_ReturnsPalindrome(int inputA, int inputB, int expected)
 		{
 			// Act
