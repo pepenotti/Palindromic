@@ -1,6 +1,0 @@
-@Palindromic.API_HostAddress = http://localhost:5105
-
-GET {{Palindromic.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
