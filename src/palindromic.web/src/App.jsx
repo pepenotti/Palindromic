@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 
+
+
 function App() {
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
@@ -13,12 +15,11 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(env.AZURE_FUNCTION_URL, {
-        method: 'POST',
+      const response = await fetch(`${import.meta.env.VITE_AZURE_FUNCTION_URL}/api/longestbetween/${input1}/${input2}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ input1, input2 }),
       })
       if (!response.ok) {
         throw new Error('Network response was not ok')
