@@ -8,6 +8,13 @@ The objective was to develop an application that finds the largest palindromic n
 
 You can have a quick check on the functionality by visiting [this link](https://pepenotti.github.io/Palindromic/).
 
+![Preview](./docs/site-preview.png)
+
+1. Set the first number.
+2. Set the second number.
+3. Click on the `Submit` button trigger the search for the largest palindromic number between the two numbers.
+4. The result will be displayed below the form.
+
 If you want to run the application locally, you can follow the instructions below and run it as:
 - [Running as Website and Azure Function](#running-as-website-and-azure-function)
 - [Running as Console Application](#running-as-console-application)
