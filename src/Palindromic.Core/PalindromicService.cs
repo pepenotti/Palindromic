@@ -1,4 +1,6 @@
-﻿namespace Palindromic.Core
+﻿using System.Text;
+
+namespace Palindromic.Core
 {
 	public class PalindromicService : IPalindromicService
 	{
@@ -62,82 +64,57 @@
 		/// <exception cref="InvalidOperationException"></exception>
 		public int GetCloserLowerPalindromic(int inputA, int inputB)
 		{
-			var originalHighest = inputA > inputB ? inputA : inputB;
-			var lowest = inputA < inputB ? inputA : inputB;
-			var highest = originalHighest - 1;
 
-			if (highest % 10 == 0)
+			var highest = Math.Max(inputA, inputB) - 1;
+			var lowest = Math.Min(inputA, inputB) + 1;
+			var highestStr = highest.ToString();
+			var highestStrLenght = highestStr.Length;
+			var highestStrHalfLenght = highestStrLenght / 2;
+
+			var middle = highestStrLenght % 2 == 0 ? -1 : int.Parse(highestStr[highestStrHalfLenght].ToString());
+			var leftHalf = int.Parse(highestStr.Substring(0, highestStrHalfLenght));
+			var rightHalf = middle == -1 // If no middle
+				? highestStr.Substring(highestStrHalfLenght)
+				: highestStr.Substring(highestStrHalfLenght + 1);
+
+
+			var reversedRightHalf = int.Parse(string.Concat(rightHalf.Reverse()));
+
+			if (leftHalf > reversedRightHalf)
 			{
-				highest -= 1;
-			}
-
-			if (highest <= lowest)
-			{
-				return IsPalindromic(lowest) ? lowest : throw new InvalidOperationException("No palindromic number found");
-			}
-
-			var highestString = highest.ToString();
-			var lowestString = lowest.ToString();
-
-			//Mirror the highestString first half to get the closest palindrome
-			var firstHalf = highestString.Substring(0, highestString.Length / 2);
-			var secondHalf = highestString.Substring(highestString.Length / 2);
-			var middleChar = highestString.Length % 2 == 0 ? "" : highestString[highestString.Length / 2].ToString();
-			var middleCharValue = string.IsNullOrEmpty(middleChar) ? -1 : int.Parse(middleChar);
-			var palindrome = "";
-
-			if (!string.IsNullOrEmpty(middleChar))
-			{
-				secondHalf = secondHalf.Remove(0, 1);
-			}
-
-			var stopAdjusting = false;
-
-			//Construct the palindrome comparing the first half with the second half making sure the resulting number is not higher or lower than the original bounds
-			for (var i = 0; i < firstHalf.Length; i++)
-			{
-				var firstChar = firstHalf[firstHalf.Length - 1 - i];
-				var secondChar = secondHalf[i];
-				var firstCharInt = int.Parse(firstChar.ToString());
-				var secondCharInt = int.Parse(secondChar.ToString());
-
-				if (stopAdjusting)
+				// If number lenght is uneven check if we have to decrease the middle and the left half
+				if (middle != -1)
 				{
-					palindrome = firstChar + palindrome;
-					continue;
-				}
+					middle = middle == 0 ? 9 : middle - 1;
 
-				if (firstCharInt < secondCharInt)
-				{
-					palindrome = firstChar + palindrome;
-				}
-				else if (firstCharInt > secondCharInt)
-				{
-					if (middleCharValue > 0)
+					if (middle == 9)
 					{
-						middleCharValue--;
-						middleChar = middleCharValue.ToString();
-						stopAdjusting = true;
+						leftHalf = leftHalf - 1;
 					}
-					else
-					{
-						while (firstCharInt > secondCharInt)
-						{
-							firstCharInt--;
-						}
-					}
-
-					palindrome = firstCharInt + palindrome;
 				}
 				else
 				{
-					palindrome = firstChar + palindrome;
+					leftHalf = leftHalf - 1;
 				}
 			}
-			palindrome = palindrome + middleChar + new string(palindrome.Reverse().ToArray());
-			var palindromeNumber = int.Parse(palindrome);
 
-			return palindromeNumber < originalHighest && palindromeNumber > lowest ? palindromeNumber : throw new InvalidOperationException("No palindromic number found");
+			var builder = new StringBuilder();
+			builder.Append(leftHalf);
+
+			if(middle != -1)
+				builder.Append(middle);
+
+			//If the left side has now less numbers than the right side
+			//We need to add a 9 to the middle
+			if (leftHalf.ToString().Length < rightHalf.Length)
+				builder.Append("9");
+
+			builder.Append(string.Concat(leftHalf.ToString().Reverse()));
+			var palindrome = int.Parse(builder.ToString());
+
+			return palindrome >= lowest
+				? palindrome
+				: throw new InvalidOperationException("No palindromic number found");
 		}
 	}
 }

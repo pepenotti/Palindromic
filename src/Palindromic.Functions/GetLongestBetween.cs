@@ -29,11 +29,11 @@ namespace Palindromic.Functions
 
 			try
 			{
-				var result = _palindromicService.GetLongestBetween(inputA, inputB);
+				var result = _palindromicService.GetCloserLowerPalindromic(inputA, inputB);
 				_logger.LogTrace(_logger.IsEnabled(LogLevel.Trace) ? $"The highest palindrome between {inputA} and {inputB} is {result}" : string.Empty);
 				return new OkObjectResult(result);
 			}
-			catch (System.Exception ex)
+			catch (Exception ex)
 			{
 				return new BadRequestObjectResult(ex.Message);
 			}

@@ -10,7 +10,7 @@ var palindromicService = new PalindromicService();
 
 try
 {
-	var result = palindromicService.GetLongestBetween(inputA, inputB);
+	var result = palindromicService.GetCloserLowerPalindromic(inputA, inputB);
 	Console.WriteLine($"The highest palindrome between {inputA} and {inputB} is {result}");
 }
 catch (InvalidOperationException ex)
