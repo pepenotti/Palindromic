@@ -64,10 +64,15 @@ namespace Palindromic.Core
 		/// <exception cref="InvalidOperationException"></exception>
 		public int GetCloserLowerPalindromic(int inputA, int inputB)
 		{
-
 			var highest = Math.Max(inputA, inputB) - 1;
 			var lowest = Math.Min(inputA, inputB) + 1;
 			var highestStr = highest.ToString();
+
+			if(highestStr.Length == 1)
+			{
+				return highest;
+			}
+
 			var highestStrLenght = highestStr.Length;
 			var highestStrHalfLenght = highestStrLenght / 2;
 
@@ -77,44 +82,60 @@ namespace Palindromic.Core
 				? highestStr.Substring(highestStrHalfLenght)
 				: highestStr.Substring(highestStrHalfLenght + 1);
 
-
 			var reversedRightHalf = int.Parse(string.Concat(rightHalf.Reverse()));
 
 			if (leftHalf > reversedRightHalf)
 			{
-				// If number lenght is uneven check if we have to decrease the middle and the left half
-				if (middle != -1)
-				{
-					middle = middle == 0 ? 9 : middle - 1;
-
-					if (middle == 9)
-					{
-						leftHalf = leftHalf - 1;
-					}
-				}
-				else
-				{
-					leftHalf = leftHalf - 1;
-				}
+				AdjustMiddleOrLeftHalf(ref middle, ref leftHalf);
 			}
 
-			var builder = new StringBuilder();
-			builder.Append(leftHalf);
+			var palindrome = BuildPalindrome(leftHalf, middle, rightHalf);
 
-			if(middle != -1)
-				builder.Append(middle);
+			if (palindrome > highest)
+			{
+				AdjustMiddleOrLeftHalf(ref middle, ref leftHalf);
 
-			//If the left side has now less numbers than the right side
-			//We need to add a 9 to the middle
-			if (leftHalf.ToString().Length < rightHalf.Length)
-				builder.Append("9");
-
-			builder.Append(string.Concat(leftHalf.ToString().Reverse()));
-			var palindrome = int.Parse(builder.ToString());
+				palindrome = BuildPalindrome(leftHalf, middle, rightHalf);
+			}
 
 			return palindrome >= lowest
 				? palindrome
 				: throw new InvalidOperationException("No palindromic number found");
+		}
+
+		private static void AdjustMiddleOrLeftHalf(ref int middle, ref int leftHalf)
+		{
+			// If number lenght is uneven check if we have to decrease the middle and the left half
+			if (middle != -1)
+			{
+				middle = middle == 0 ? 9 : middle - 1;
+
+				if (middle == 9)
+				{
+					leftHalf = leftHalf - 1;
+				}
+			}
+			else
+			{
+				leftHalf = leftHalf - 1;
+			}
+		}
+
+		private int BuildPalindrome(int leftHalf, int middle, string rightHalf)
+		{
+			var builder = new StringBuilder();
+			builder.Append(leftHalf);
+
+			if (middle != -1)
+				builder.Append(middle);
+
+			//If the left side has now less numbers than the right side
+			//We need to add a 9 to the middle
+			if (leftHalf.ToString().Length < rightHalf.ToString().Length)
+				builder.Append("9");
+
+			builder.Append(string.Concat(leftHalf.ToString().Reverse()));
+			return int.Parse(builder.ToString());
 		}
 	}
 }

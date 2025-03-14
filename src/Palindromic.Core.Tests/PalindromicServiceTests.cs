@@ -38,6 +38,7 @@ namespace Palindromic.Core.Tests
 		[Theory]
 		[InlineData(122, 130)]
 		[InlineData(130, 122)]
+		[InlineData(1234321, 1234321)] // Same palindrome
 		[InlineData(121, 121)] // Equal
 		public void GetLongestBetween_WhenNoPalindromeFound_ThrowsInvalidOperationException(int inputA, int inputB)
 		{
@@ -51,6 +52,7 @@ namespace Palindromic.Core.Tests
 		[Theory]
 		[InlineData(122, 130)]
 		[InlineData(130, 122)]
+		[InlineData(1234321, 1234321)] // Same palindrome
 		[InlineData(121, 121)] // Equal
 		public void GetCloserLowerPalindromic_WhenNoPalindromeFound_ThrowsInvalidOperationException(int inputA, int inputB)
 		{
@@ -80,6 +82,11 @@ namespace Palindromic.Core.Tests
 		[InlineData(1100, 0, 1001)] // Test zeroes [Uneven]
 		[InlineData(2100, 0, 2002)] // Test zeroes [Uneven]
 		[InlineData(2002, 0, 1991)] // Test zeroes [Uneven]
+		[InlineData(1, 10, 9)] // Single digit
+		[InlineData(123456789, 987654321, 987646789)] // Large numbers
+		[InlineData(134134, 85336, 133331)] // Test zeroes [Uneven]
+		[InlineData(0, 100, 99)] // Zero to positive
+		[InlineData(100, 0, 99)] // Positive to zero
 		[InlineData(int.MinValue, int.MaxValue, 2147447412)] // Test bounds
 		public void GetLongestBetween_WhenPalindromeFound_ReturnsPalindrome(int inputA, int inputB, int expected)
 		{
@@ -109,6 +116,12 @@ namespace Palindromic.Core.Tests
 		[InlineData(1100, 0, 1001)] // Test zeroes [Uneven]
 		[InlineData(2100, 0, 2002)] // Test zeroes [Uneven]
 		[InlineData(2002, 0, 1991)] // Test zeroes [Uneven]
+		[InlineData(1, 10, 9)] // Single digit
+		[InlineData(123456789, 987654321, 987646789)] // Large numbers
+		[InlineData(134134, 85336, 133331)] // Test zeroes [Uneven]
+		[InlineData(1345135, 85336, 1344431)] // Test zeroes [Uneven]
+		[InlineData(0, 100, 99)] // Zero to positive
+		[InlineData(100, 0, 99)] // Positive to zero
 		[InlineData(int.MinValue, int.MaxValue, 2147447412)] // Test bounds
 		public void GetCloserLowerPalindromic_WhenPalindromeFound_ReturnsPalindrome(int inputA, int inputB, int expected)
 		{
