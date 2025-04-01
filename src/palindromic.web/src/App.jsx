@@ -58,8 +58,10 @@ function App() {
 					max="2147483647"
 				/>
 				<br />
-				<button type="submit" className="button" disabled={loading}>
-					{loading ? 'Loading...' : 'Submit'}
+				<button type="submit" className="button" disabled>
+				{/* <button type="submit" className="button" disabled={loading}> */}
+					{"API Offline"}
+					{/* {loading ? 'Loading...' : 'Submit'} */}
 				</button>
 			</form>
 			{loading && <p className="loader">Loading...</p>}
